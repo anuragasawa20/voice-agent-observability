@@ -40,7 +40,7 @@
    npm ci --only=production
    cp env.example .env
    nano .env  # Add your API keys
-   pm2 start ecosystem.config.js
+   pm2 start ecosystem.config.cjs
    pm2 save
    ```
 

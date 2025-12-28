@@ -76,7 +76,7 @@ superbryn-proto/
 ├── test-cases/          # Test case examples
 ├── vapi-agent-config/   # Agent configuration files
 ├── Dockerfile           # Docker configuration
-├── ecosystem.config.js  # PM2 configuration
+├── ecosystem.config.cjs  # PM2 configuration
 ├── nginx.conf          # Nginx reverse proxy config
 └── deploy.sh           # Deployment script
 ```

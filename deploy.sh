@@ -23,7 +23,7 @@ mkdir -p logs
 
 # Restart application with PM2
 echo "🔄 Restarting application..."
-pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs
 
 # Save PM2 process list
 pm2 save
