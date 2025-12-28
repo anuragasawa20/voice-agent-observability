@@ -1,0 +1,328 @@
+{
+    "agentDescription": {
+        "name": "BrightSmile Dental Clinic Receptionist Agent",
+        "purpose": "Handle appointment scheduling, patient inquiries, and provide information about dental services",
+        "capabilities": [
+            "Schedule new appointments",
+            "Reschedule existing appointments",
+            "Provide information about services (cleanings, fillings, root canals, etc.)",
+            "Answer questions about insurance and payment",
+            "Provide office hours and location information",
+            "Handle appointment cancellations"
+        ],
+        "personality": "Professional, warm, empathetic, and efficient"
+    },
+    "testCases": [
+        {
+            "testCaseId": "DC-001",
+            "testName": "Schedule New Cleaning Appointment - Standard Case",
+            "description": "Customer wants to schedule a routine dental cleaning appointment",
+            "phone_number": "+1234567890",
+            "scenario": "You are calling BrightSmile Dental Clinic to schedule a routine dental cleaning appointment. You are a new patient named Sarah Johnson. You prefer morning appointments and are available on weekdays. You have dental insurance through BlueCross BlueShield. You need the appointment within the next 2-3 weeks. Be polite and provide information when asked. If the agent asks about specific dates, mention you're flexible but prefer Tuesdays or Wednesdays in the morning.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "appointmentScheduled": true,
+                "appointmentDetails": {
+                    "patientName": "Sarah Johnson",
+                    "appointmentType": "Routine Cleaning",
+                    "appointmentDate": "2024-02-13 or 2024-02-14 (Tuesday or Wednesday)",
+                    "appointmentTime": "Morning time slot (between 9:00 AM - 12:00 PM)",
+                    "timeframe": "Within 2-3 weeks from call date"
+                },
+                "informationCollected": {
+                    "patientName": "Sarah Johnson",
+                    "appointmentType": "Routine Cleaning / Dental Cleaning",
+                    "preferredTime": "Morning",
+                    "preferredDays": "Tuesday or Wednesday",
+                    "insuranceProvider": "BlueCross BlueShield",
+                    "patientStatus": "New Patient",
+                    "urgency": "Within 2-3 weeks"
+                },
+                "agentActions": [
+                    "Greeted customer professionally",
+                    "Asked for patient name",
+                    "Identified appointment type (cleaning)",
+                    "Asked about preferred dates/times",
+                    "Confirmed insurance information",
+                    "Provided available appointment slot",
+                    "Confirmed appointment details",
+                    "Provided confirmation information (date, time, location if applicable)"
+                ],
+                "complianceCheckpoints": [
+                    "HIPAA compliance - handled patient information appropriately",
+                    "No medical advice given (appropriate for receptionist)",
+                    "Professional boundaries maintained"
+                ],
+                "successCriteria": {
+                    "appointmentDateSet": true,
+                    "appointmentTimeSet": true,
+                    "patientInformationRecorded": true,
+                    "confirmationProvided": true,
+                    "nextStepsCommunicated": true
+                }
+            }
+        },
+        {
+            "testCaseId": "DC-002",
+            "testName": "Schedule Urgent Appointment - Emergency Case",
+            "description": "Customer has a dental emergency and needs urgent care",
+            "phone_number": "+1234567891",
+            "scenario": "You are calling BrightSmile Dental Clinic because you have a severe toothache that started this morning. You're in significant pain and need to see a dentist as soon as possible. Your name is Michael Chen. You're an existing patient. You're available today or tomorrow at any time. You're worried and in pain, so you may sound stressed. The agent should show empathy and try to accommodate your urgent need.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "appointmentScheduled": true,
+                "appointmentDetails": {
+                    "patientName": "Michael Chen",
+                    "appointmentType": "Emergency / Urgent Care / Same-day appointment",
+                    "appointmentDate": "Same day or next day (within 24-48 hours)",
+                    "appointmentTime": "Earliest available slot",
+                    "urgency": "High - same day or next day"
+                },
+                "informationCollected": {
+                    "patientName": "Michael Chen",
+                    "appointmentType": "Emergency / Urgent Care",
+                    "symptoms": "Severe toothache / Pain",
+                    "patientStatus": "Existing Patient",
+                    "urgency": "Same day or next day",
+                    "availability": "Any time today or tomorrow"
+                },
+                "agentActions": [
+                    "Showed empathy for patient's pain",
+                    "Identified urgent nature of request",
+                    "Asked for patient name",
+                    "Verified existing patient status",
+                    "Offered earliest available appointment",
+                    "Provided same-day or next-day option",
+                    "Reassured patient about getting care quickly",
+                    "Provided appointment confirmation"
+                ],
+                "complianceCheckpoints": [
+                    "Empathetic response to patient distress",
+                    "No medical diagnosis over phone (appropriate)",
+                    "Urgent care protocol followed"
+                ],
+                "successCriteria": {
+                    "empathyDemonstrated": true,
+                    "urgentAppointmentOffered": true,
+                    "appointmentDateSet": true,
+                    "appointmentTimeSet": true,
+                    "patientReassured": true,
+                    "confirmationProvided": true
+                }
+            }
+        },
+        {
+            "testCaseId": "DC-003",
+            "testName": "Reschedule Existing Appointment",
+            "description": "Customer needs to reschedule a previously booked appointment",
+            "phone_number": "+1234567892",
+            "scenario": "You are calling BrightSmile Dental Clinic to reschedule your existing appointment. Your name is Emily Rodriguez. You have an appointment scheduled for February 15th at 2:00 PM, but you need to change it because of a work conflict. You'd prefer to reschedule to February 20th or 21st in the afternoon. Be polite and explain the reason for rescheduling.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "appointmentRescheduled": true,
+                "appointmentDetails": {
+                    "patientName": "Emily Rodriguez",
+                    "originalAppointmentDate": "2024-02-15",
+                    "originalAppointmentTime": "2:00 PM",
+                    "newAppointmentDate": "2024-02-20 or 2024-02-21",
+                    "newAppointmentTime": "Afternoon time slot (after 12:00 PM)",
+                    "reasonForReschedule": "Work conflict"
+                },
+                "informationCollected": {
+                    "patientName": "Emily Rodriguez",
+                    "originalAppointmentDate": "February 15th",
+                    "originalAppointmentTime": "2:00 PM",
+                    "preferredNewDate": "February 20th or 21st",
+                    "preferredNewTime": "Afternoon",
+                    "reasonForChange": "Work conflict"
+                },
+                "agentActions": [
+                    "Greeted customer",
+                    "Asked for patient name",
+                    "Located existing appointment",
+                    "Confirmed original appointment details",
+                    "Asked about preferred new date/time",
+                    "Offered alternative appointment slots",
+                    "Confirmed new appointment details",
+                    "Cancelled or updated original appointment",
+                    "Provided confirmation of rescheduled appointment"
+                ],
+                "complianceCheckpoints": [
+                    "Verified patient identity before accessing appointment",
+                    "Handled rescheduling professionally",
+                    "No cancellation fees mentioned inappropriately"
+                ],
+                "successCriteria": {
+                    "originalAppointmentIdentified": true,
+                    "newAppointmentDateSet": true,
+                    "newAppointmentTimeSet": true,
+                    "originalAppointmentUpdated": true,
+                    "confirmationProvided": true
+                }
+            }
+        },
+        {
+            "testCaseId": "DC-004",
+            "testName": "Inquire About Services and Pricing",
+            "description": "Customer wants information about specific dental services and costs",
+            "phone_number": "+1234567893",
+            "scenario": "You are calling BrightSmile Dental Clinic to inquire about getting a root canal procedure. Your name is David Thompson. You're experiencing tooth pain and your regular dentist recommended a root canal. You want to know: 1) If they perform root canals, 2) What the cost would be approximately, 3) If they accept your insurance (Aetna), 4) How long the procedure takes, 5) If you can schedule a consultation first. Ask questions naturally and see if the agent provides helpful information.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "informationProvided": true,
+                "appointmentScheduled": false,
+                "informationCollected": {
+                    "patientName": "David Thompson",
+                    "inquiryType": "Root Canal Procedure",
+                    "insuranceProvider": "Aetna",
+                    "questionsAsked": [
+                        "Do you perform root canals?",
+                        "What is the approximate cost?",
+                        "Do you accept Aetna insurance?",
+                        "How long does the procedure take?",
+                        "Can I schedule a consultation first?"
+                    ]
+                },
+                "agentActions": [
+                    "Greeted customer",
+                    "Asked for patient name",
+                    "Identified inquiry type (root canal)",
+                    "Provided information about service availability",
+                    "Discussed cost/pricing information (or referred to consultation)",
+                    "Confirmed insurance acceptance",
+                    "Provided procedure duration information",
+                    "Offered to schedule consultation",
+                    "Proactively provided next steps"
+                ],
+                "informationProvided": {
+                    "serviceAvailable": "Root canal services available (or referral information)",
+                    "costInformation": "General cost range or consultation needed for exact quote",
+                    "insuranceAccepted": "Aetna accepted (or insurance verification process explained)",
+                    "procedureDuration": "Estimated time for root canal procedure",
+                    "consultationOffered": "Consultation appointment offered"
+                },
+                "complianceCheckpoints": [
+                    "No specific medical diagnosis given",
+                    "Appropriate referral to consultation for detailed information",
+                    "Insurance information handled correctly"
+                ],
+                "successCriteria": {
+                    "serviceInformationProvided": true,
+                    "pricingInformationDiscussed": true,
+                    "insuranceInformationProvided": true,
+                    "consultationOffered": true,
+                    "nextStepsCommunicated": true
+                }
+            }
+        },
+        {
+            "testCaseId": "DC-005",
+            "testName": "Cancel Appointment with Reason",
+            "description": "Customer needs to cancel an appointment and may want to reschedule",
+            "phone_number": "+1234567894",
+            "scenario": "You are calling BrightSmile Dental Clinic to cancel your appointment scheduled for February 18th at 10:00 AM. Your name is Jennifer Martinez. You need to cancel because you're going out of town unexpectedly. You'd like to know if you can reschedule for when you return, which will be around March 1st. Be polite and see if the agent offers to reschedule proactively.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "appointmentCancelled": true,
+                "rescheduleOffered": true,
+                "appointmentDetails": {
+                    "patientName": "Jennifer Martinez",
+                    "cancelledAppointmentDate": "2024-02-18",
+                    "cancelledAppointmentTime": "10:00 AM",
+                    "reasonForCancellation": "Out of town / Travel",
+                    "rescheduleDate": "Around March 1st (if rescheduled)",
+                    "rescheduleTime": "To be determined"
+                },
+                "informationCollected": {
+                    "patientName": "Jennifer Martinez",
+                    "appointmentToCancel": "February 18th at 10:00 AM",
+                    "reasonForCancellation": "Out of town / Travel",
+                    "rescheduleInterest": "Yes, around March 1st"
+                },
+                "agentActions": [
+                    "Greeted customer",
+                    "Asked for patient name",
+                    "Located appointment to cancel",
+                    "Confirmed appointment details",
+                    "Processed cancellation",
+                    "Asked about rescheduling (proactive)",
+                    "Offered future appointment slot (if rescheduling)",
+                    "Provided cancellation confirmation",
+                    "Provided reschedule information (if applicable)"
+                ],
+                "complianceCheckpoints": [
+                    "Verified patient identity",
+                    "Handled cancellation professionally",
+                    "Cancellation policy followed (if applicable)"
+                ],
+                "successCriteria": {
+                    "appointmentCancelled": true,
+                    "cancellationConfirmed": true,
+                    "rescheduleOffered": true,
+                    "futureAppointmentSet": true,
+                    "confirmationProvided": true
+                }
+            }
+        },
+        {
+            "testCaseId": "DC-006",
+            "testName": "Complex Multi-Step Appointment - New Patient with Insurance Verification",
+            "description": "New patient with complex needs requiring multiple pieces of information",
+            "phone_number": "+1234567895",
+            "scenario": "You are calling BrightSmile Dental Clinic as a new patient named Robert Kim. You need a comprehensive dental exam and cleaning. You have Cigna insurance (policy number: CI-123456789). You're also interested in teeth whitening services. You prefer evening appointments after 5 PM and are available Monday through Thursday. You want to know about payment plans if insurance doesn't cover everything. Ask multiple questions and see how the agent handles the complexity.",
+            "final_outcome": {
+                "taskCompleted": true,
+                "appointmentScheduled": true,
+                "appointmentDetails": {
+                    "patientName": "Robert Kim",
+                    "appointmentType": "Comprehensive Exam and Cleaning",
+                    "appointmentDate": "Monday-Thursday",
+                    "appointmentTime": "After 5:00 PM (evening)",
+                    "additionalServices": "Teeth Whitening (inquiry)"
+                },
+                "informationCollected": {
+                    "patientName": "Robert Kim",
+                    "patientStatus": "New Patient",
+                    "appointmentType": "Comprehensive Exam and Cleaning",
+                    "insuranceProvider": "Cigna",
+                    "insurancePolicyNumber": "CI-123456789",
+                    "preferredTime": "Evening (after 5 PM)",
+                    "preferredDays": "Monday through Thursday",
+                    "additionalInterest": "Teeth Whitening",
+                    "paymentPlanInterest": "Yes"
+                },
+                "agentActions": [
+                    "Greeted customer",
+                    "Identified new patient status",
+                    "Collected patient name",
+                    "Identified appointment needs (exam + cleaning)",
+                    "Collected insurance information (provider + policy number)",
+                    "Asked about preferred dates/times",
+                    "Addressed additional service inquiry (teeth whitening)",
+                    "Discussed payment options/payment plans",
+                    "Scheduled appointment with all details",
+                    "Provided confirmation and next steps"
+                ],
+                "informationProvided": {
+                    "insuranceVerification": "Insurance information collected for verification",
+                    "paymentOptions": "Payment plan options discussed",
+                    "teethWhiteningInfo": "Teeth whitening service information provided"
+                },
+                "complianceCheckpoints": [
+                    "HIPAA compliance for new patient information",
+                    "Insurance information handled securely",
+                    "Financial information discussed appropriately"
+                ],
+                "successCriteria": {
+                    "allInformationCollected": true,
+                    "appointmentDateSet": true,
+                    "appointmentTimeSet": true,
+                    "insuranceInformationRecorded": true,
+                    "additionalServicesAddressed": true,
+                    "paymentOptionsDiscussed": true,
+                    "confirmationProvided": true
+                }
+            }
+        }
+    ]
+}

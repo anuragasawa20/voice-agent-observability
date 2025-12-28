@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard - Security Testing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Test Voice Agent </h1>
+            <p>Manage and monitor your security test cases</p>
+        </header>
+
+        <!-- Test Form Section -->
+        <section class="form-section">
+            <div class="section-header">
+                <h2>Create New Test</h2>
+                <button type="button" class="btn-secondary" onclick="loadExample()">Load Example</button>
+            </div>
+            <form id="testForm">
+                <div class="form-group">
+                    <label for="phone_number">Phone Number *</label>
+                    <input type="tel" id="phone_number" name="phone_number" required placeholder="+14482286226"
+                        value="+14482286226">
+                </div>
+
+                <div class="form-group">
+                    <label for="scenario">Scenario *</label>
+                    <textarea id="scenario" name="scenario" rows="8" required
+                        placeholder="Enter the test scenario..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="final_outcome">Expected Outcome (JSON)</label>
+                    <textarea id="final_outcome" name="final_outcome" rows="12"
+                        placeholder='{"taskCompleted": false, "securityBreach": false, ...}'></textarea>
+                    <small>Enter JSON object for expected outcome</small>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    <span id="submitText">Run Test</span>
+                    <span id="submitSpinner" class="spinner" style="display: none;"></span>
+                </button>
+            </form>
+
+            <div id="formMessage" class="message" style="display: none;"></div>
+        </section>
+
+        <!-- Tests List Section -->
+        <section class="tests-section">
+            <div class="section-header">
+                <h2>Test History</h2>
+                <button class="btn-secondary" onclick="loadTests()">Refresh</button>
+            </div>
+            <div id="testsList" class="tests-list">
+                <div class="loading">Loading tests...</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Test Detail Modal -->
+    <div id="testModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Test Details</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <div class="loading">Loading test details...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

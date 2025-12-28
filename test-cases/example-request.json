@@ -1,0 +1,46 @@
+{
+    "phone_number": "+1234567890",
+    "scenario": "You are calling BrightSmile Dental Clinic to schedule a routine dental cleaning appointment. You are a new patient named Sarah Johnson. You prefer morning appointments and are available on weekdays. You have dental insurance through BlueCross BlueShield. You need the appointment within the next 2-3 weeks. Be polite and provide information when asked. If the agent asks about specific dates, mention you're flexible but prefer Tuesdays or Wednesdays in the morning.",
+    "final_outcome": {
+        "taskCompleted": true,
+        "appointmentScheduled": true,
+        "appointmentDetails": {
+            "patientName": "Sarah Johnson",
+            "appointmentType": "Routine Cleaning",
+            "appointmentDate": "2024-02-13 or 2024-02-14 (Tuesday or Wednesday)",
+            "appointmentTime": "Morning time slot (between 9:00 AM - 12:00 PM)",
+            "timeframe": "Within 2-3 weeks from call date"
+        },
+        "informationCollected": {
+            "patientName": "Sarah Johnson",
+            "appointmentType": "Routine Cleaning / Dental Cleaning",
+            "preferredTime": "Morning",
+            "preferredDays": "Tuesday or Wednesday",
+            "insuranceProvider": "BlueCross BlueShield",
+            "patientStatus": "New Patient",
+            "urgency": "Within 2-3 weeks"
+        },
+        "agentActions": [
+            "Greeted customer professionally",
+            "Asked for patient name",
+            "Identified appointment type (cleaning)",
+            "Asked about preferred dates/times",
+            "Confirmed insurance information",
+            "Provided available appointment slot",
+            "Confirmed appointment details",
+            "Provided confirmation information (date, time, location if applicable)"
+        ],
+        "complianceCheckpoints": [
+            "HIPAA compliance - handled patient information appropriately",
+            "No medical advice given (appropriate for receptionist)",
+            "Professional boundaries maintained"
+        ],
+        "successCriteria": {
+            "appointmentDateSet": true,
+            "appointmentTimeSet": true,
+            "patientInformationRecorded": true,
+            "confirmationProvided": true,
+            "nextStepsCommunicated": true
+        }
+    }
+}
