@@ -11,6 +11,174 @@ A comprehensive dashboard for testing and evaluating voice AI agents with securi
 - 💾 **Test History**: Track all tests with detailed results and transcripts
 - 🎵 **Audio Recordings**: Listen to call recordings directly in the dashboard
 
+## How It Works
+
+The system follows an asynchronous flow where tests are initiated, calls are made, and results are evaluated automatically. Here's the complete sequence:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        PHASE 1: INITIATION                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    User
+     │
+     │ Fill form & click "Run Test"
+     │
+     ▼
+┌──────────┐
+│ Frontend │
+└──────────┘
+     │
+     │ POST /webhook/test/run
+     │ (phone_number, scenario, final_outcome)
+     │
+     ▼
+┌──────────┐
+│ Backend  │──┐
+└──────────┘  │
+     │        │ Save test to database (status: pending)
+     │        │
+     │        │ Create outbound call
+     │        │
+     │        ▼
+     │    ┌──────┐
+     │    │ VAPI │
+     │    └──────┘
+     │
+     │ Return test_id & call_id
+     │
+     ▼
+┌──────────┐
+│ Frontend │──┐ Start polling for results
+└──────────┘  │ (GET /webhook/tests/:id)
+              │
+              │ (continues in Phase 4)
+              │
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      PHASE 2: CALL EXECUTION                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────┐
+│ VAPI │
+└──────┘
+   │
+   │ Make phone call
+   │
+   ▼
+┌─────────────────────┐
+│  Target Agent       │
+│  (OpenAI GPT-4)     │
+└─────────────────────┘
+   │
+   │ ◄─────────────────► Conversation happens
+   │   (Real-time voice interaction)
+   │
+   │ Call ends
+   │
+   ▼
+┌──────┐
+│ VAPI │──┐
+└──────┘  │ Webhook: Call ended
+          │ (call_id, status)
+          │
+          ▼
+     ┌──────────┐
+     │ Backend  │
+     └──────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        PHASE 3: EVALUATION                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────┐
+│ Backend  │
+└──────────┘
+   │
+   │ Fetch call recording & transcript
+   │ (via VAPI API)
+   │
+   ▼
+┌──────┐
+│ VAPI │──┐ Return transcript, audio URL, metadata
+└──────┘  │
+          │
+          ▼
+     ┌──────────┐
+     │ Backend  │──┐ Save transcript to database
+     └──────────┘  │
+                   │
+                   │ Evaluate transcript
+                   │ (transcript + scenario + expected_outcome)
+                   │
+                   ▼
+              ┌──────────────┐
+              │  Gemini AI   │
+              │  (Evaluator) │
+              └──────────────┘
+                   │
+                   │ Analyze performance metrics:
+                   │ • Task Completion
+                   │ • Accuracy
+                   │ • Security (for security tests)
+                   │ • Empathy, Naturalness, Efficiency
+                   │ • And more...
+                   │
+                   │ Return Pass/Fail result
+                   │ (with detailed scores)
+                   │
+                   ▼
+              ┌──────────┐
+              │ Backend  │──┐ Update test result
+              └──────────┘  │ (status: evaluated, scores, passed)
+                            │
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     PHASE 4: RESULTS DISPLAY                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────┐
+│ Frontend │ (Polling from Phase 1)
+└──────────┘
+   │
+   │ GET /webhook/tests/:id
+   │
+   ▼
+┌──────────┐
+│ Backend  │──┐ Return test result
+└──────────┘  │ (with evaluation scores)
+              │
+              ▼
+         ┌──────────┐
+         │ Frontend │──┐ Display Pass/Fail & Scores
+         └──────────┘  │ (Show detailed evaluation results)
+                       │
+                       ▼
+                    User
+```
+
+### Key Components
+
+1. **Frontend (Dashboard)**: User interface for creating tests and viewing results
+2. **Backend (Express.js)**: Handles test creation, call orchestration, and result storage
+3. **VAPI Platform**: Manages phone calls and provides transcript/recording APIs
+4. **Target Agent (OpenAI GPT-4)**: The voice agent being tested - handles the actual conversation
+5. **Gemini AI (Evaluator)**: Analyzes transcripts and evaluates agent performance
+
+### Evaluation Process
+
+When a call ends, the system:
+1. Fetches the complete call transcript from VAPI
+2. Sends the transcript along with the test scenario and expected outcomes to Gemini AI
+3. Gemini evaluates the agent across multiple dimensions:
+   - ✅ Task Completion
+   - ✅ Accuracy
+   - ✅ Security (for security tests)
+   - ✅ Empathy, Naturalness, Efficiency
+   - ✅ And more (see [Evaluation Framework](test-cases/EVALUATION_FRAMEWORK_README.md))
+4. Stores comprehensive evaluation results in the database
+5. Frontend polls and displays results with detailed scores
+
 ## Quick Start
 
 ### Local Development
